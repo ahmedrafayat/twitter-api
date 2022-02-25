@@ -2,8 +2,8 @@ import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateCol
 
 import { Author } from './Author';
 
-@Entity('users')
-export class User {
+@Entity('tweets')
+export class Tweet {
   @PrimaryGeneratedColumn()
   id: number;
 

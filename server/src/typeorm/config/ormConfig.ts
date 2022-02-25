@@ -8,7 +8,7 @@ const config: ConnectionOptions = {
   username: process.env.MYSQL_USER,
   password: process.env.MYSQL_PASSWORD,
   database: process.env.MYSQL_DATABASE,
-  synchronize: false,
+  synchronize: true,
   logging: false,
   entities: ['src/typeorm/entities/**/*.ts'],
   cli: {
