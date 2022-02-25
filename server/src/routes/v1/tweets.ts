@@ -1,9 +1,8 @@
 import { Router } from 'express';
 
-import tweets from './tweets';
-
+import { create } from 'controllers/tweets/create';
 const router = Router();
 
-router.use('/tweets', tweets);
+router.post('/create', create);
 
 export default router;

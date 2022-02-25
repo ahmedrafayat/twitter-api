@@ -1,14 +1,17 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
 
-import { Author } from './Author';
+import { User } from './User';
 
 @Entity('tweets')
 export class Tweet {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Author, (author) => author.id)
-  author: Author;
+  @ManyToOne(() => User, (user) => user.id)
+  author: User;
+
+  @Column()
+  content: string;
 
   @Column()
   @CreateDateColumn()
