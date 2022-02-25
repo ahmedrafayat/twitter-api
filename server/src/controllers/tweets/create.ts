@@ -25,6 +25,7 @@ export const create = async (req: Request, res: Response, next: NextFunction) =>
     const tweetRepository = await getRepository(Tweet);
     const tweet = new Tweet();
     tweet.author = user;
+    tweet.content = content;
     const savedTweet = await tweetRepository.save(tweet);
     res.status(200).send(savedTweet);
   } catch (err) {
