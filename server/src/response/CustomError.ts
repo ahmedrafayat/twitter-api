@@ -39,7 +39,6 @@ export class CustomError extends Error {
       errors: this.errors,
       errorRaw: this.errorRaw,
       errorsValidation: this.errorsValidation,
-      stack: this.stack,
     };
   }
 }
