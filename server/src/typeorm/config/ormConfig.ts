@@ -1,5 +1,6 @@
-import { ConnectionOptions } from 'typeorm';
+import 'dotenv/config';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
+import { ConnectionOptions } from 'typeorm-seeding';
 
 const config: ConnectionOptions = {
   type: 'mysql',
@@ -15,6 +16,8 @@ const config: ConnectionOptions = {
     entitiesDir: 'src/typeorm/entities',
   },
   namingStrategy: new SnakeNamingStrategy(),
+  seeds: ['src/typeorm/seeds/**/*{.ts,.js}'],
+  factories: ['src/typeorm/factories/**/*{.ts,.js}'],
 };
 
 export = config;
