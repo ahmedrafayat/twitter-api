@@ -5,9 +5,13 @@ services:
     image: mysql:8
     restart: always
     environment: 
-      MYSQL_ROOT_PASSWORD: twitter
+      MYSQL_USER: twitterdev
+      MYSQL_PASSWORD: twitter
       MYSQL_DATABASE: twitter
+      MYSQL_ROOT_PASSWORD: twitter
     ports:
       - '3306:3306'
+    expose:
+      - '3306'
     volumes:
       - ./server/database:/var/lib/mysql

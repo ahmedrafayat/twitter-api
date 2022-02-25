@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import 'reflect-metadata';
 import fs from 'fs';
 import path from 'path';
@@ -7,6 +8,9 @@ import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
+
+import { dbCreateConnection } from 'typeorm/connect';
+
 import { ErrorHandler } from './middlewares/ErrorHandler';
 import routes from './routes';
 
@@ -17,7 +21,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 try {
-  const accessLogStream = fs.createWriteStream(path.join(__dirname, '../../log/access.log'), {
+  const accessLogStream = fs.createWriteStream(path.join(__dirname, '../log/access.log'), {
     flags: 'a',
   });
   app.use(morgan('combined', { stream: accessLogStream }));
@@ -35,3 +39,6 @@ app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
 
+(async () => {
+  await dbCreateConnection();
+})();
