@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "debug=* NODE_PATH=./src ts-node-dev --respawn ./src/index.ts",
+    "dev": "debug=* NODE_PATH=./src ts-node-dev --respawn --inspect=4321 ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed:config": "ts-node ./node_modules/typeorm-seeding/dist/cli.js --root ./src/typeorm/config --configName ormConfig.ts config",
     "seed:run": "NODE_PATH=./src ts-node ./node_modules/typeorm-seeding/dist/cli.js --root ./src/typeorm/config --configName ormConfig.ts seed",

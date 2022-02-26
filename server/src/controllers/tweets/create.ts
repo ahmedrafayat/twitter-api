@@ -8,7 +8,7 @@ import { User } from '../../typeorm/entities/User';
 import { Tweet } from './../../typeorm/entities/Tweet';
 
 export const create = async (req: Request, res: Response, next: NextFunction) => {
-  // ownerId will be removed once authentication is set up
+  // TODO: ownerId will be removed once authentication is set up
   const { content, ownerId } = req.body;
 
   const userRepository = getRepository(User);
