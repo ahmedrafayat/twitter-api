@@ -15,6 +15,7 @@ export const listFollowing = async (req: Request, res: Response, next: NextFunct
       .innerJoin(UserFollowing, 'uf', 'uf.follower_id = t.author_id')
       .innerJoin(User, 'u', 't.author_id = u.id')
       .where('u.id = :ownerId', { ownerId })
+      .orderBy('t.created_at', 'DESC')
       .getMany();
 
     res.send(tweets);
