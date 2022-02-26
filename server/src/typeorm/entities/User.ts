@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 import { UserFollowing } from './Follower';
@@ -18,8 +19,8 @@ export class User {
   })
   email: string;
 
-  @Column()
-  password: string;
+  @Column({ name: 'password' })
+  _password: string;
 
   @Column({
     nullable: true,
@@ -43,4 +44,12 @@ export class User {
 
   @OneToMany(() => UserFollowing, (userFollowing) => userFollowing.follower)
   following: UserFollowing[];
+
+  set password(pass: string) {
+    this._password = bcrypt.hashSync(pass, 8);
+  }
+
+  get password() {
+    return this.password;
+  }
 }

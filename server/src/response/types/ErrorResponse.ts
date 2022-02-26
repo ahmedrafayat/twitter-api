@@ -1,5 +1,5 @@
-import { ErrorValidation } from './ErrorValidation';
 import { ErrorType } from './ErrorType';
+import { ErrorValidation } from './ErrorValidation';
 
 export type ErrorResponse = {
   errorType: ErrorType;
