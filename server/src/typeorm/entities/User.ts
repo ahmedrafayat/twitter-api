@@ -1,4 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+
+import { Tweet } from './Tweet';
 
 @Entity('users')
 export class User {
@@ -31,4 +33,7 @@ export class User {
   @Column()
   @UpdateDateColumn()
   updated_at: Date;
+
+  @OneToMany(() => Tweet, (tweet) => tweet.author)
+  tweets: Promise<Tweet[]>;
 }

@@ -1,4 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 
 import { User } from './User';
 
@@ -8,6 +16,7 @@ export class Tweet {
   id: number;
 
   @ManyToOne(() => User, (user) => user.id)
+  @JoinColumn()
   author: User;
 
   @Column()
