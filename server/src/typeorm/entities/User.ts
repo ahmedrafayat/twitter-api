@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
+import { UserFollowing } from './Follower';
 import { Tweet } from './Tweet';
 
 @Entity('users')
@@ -36,4 +37,10 @@ export class User {
 
   @OneToMany(() => Tweet, (tweet) => tweet.author)
   tweets: Promise<Tweet[]>;
+
+  @OneToMany(() => UserFollowing, (userFollowing) => userFollowing.following)
+  followers: UserFollowing[];
+
+  @OneToMany(() => UserFollowing, (userFollowing) => userFollowing.follower)
+  following: UserFollowing[];
 }
