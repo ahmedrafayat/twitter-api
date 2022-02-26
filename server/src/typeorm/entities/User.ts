@@ -1,8 +1,8 @@
 import bcrypt from 'bcrypt';
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
-import { UserFollowing } from './Follower';
-import { Tweet } from './Tweet';
+import { UserFollowing } from 'typeorm/entities/Follower';
+import { Tweet } from 'typeorm/entities/Tweet';
 
 @Entity('users')
 export class User {
@@ -50,6 +50,10 @@ export class User {
   }
 
   get password() {
-    return this.password;
+    return this._password;
+  }
+
+  public async validatePassword(pass: string) {
+    return bcrypt.compare(pass, this.password);
   }
 }
