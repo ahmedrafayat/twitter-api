@@ -2,14 +2,12 @@ import { NextFunction, Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 
 import { CustomError } from 'response/CustomError';
-
-import { User } from '../../typeorm/entities/User';
-
-import { Tweet } from './../../typeorm/entities/Tweet';
+import { Tweet } from 'typeorm/entities/Tweet';
+import { User } from 'typeorm/entities/User';
 
 export const create = async (req: Request, res: Response, next: NextFunction) => {
-  // TODO: ownerId will be removed once authentication is set up
-  const { content, ownerId } = req.body;
+  const ownerId = req.user.id;
+  const { content } = req.body;
 
   const userRepository = getRepository(User);
   try {
@@ -30,6 +28,6 @@ export const create = async (req: Request, res: Response, next: NextFunction) =>
     res.status(200).send(savedTweet);
   } catch (err) {
     const customError = new CustomError(400, 'Raw', 'Error', null, err);
-    return next(customError);
+    next(customError);
   }
 };

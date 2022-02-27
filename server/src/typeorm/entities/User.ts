@@ -1,7 +1,8 @@
+import bcrypt from 'bcrypt';
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
-import { UserFollowing } from './Follower';
-import { Tweet } from './Tweet';
+import { UserFollowing } from 'typeorm/entities/Follower';
+import { Tweet } from 'typeorm/entities/Tweet';
 
 @Entity('users')
 export class User {
@@ -18,8 +19,8 @@ export class User {
   })
   email: string;
 
-  @Column()
-  password: string;
+  @Column({ name: 'password' })
+  _password: string;
 
   @Column({
     nullable: true,
@@ -35,7 +36,7 @@ export class User {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @OneToMany(() => Tweet, (tweet) => tweet.author)
+  @OneToMany(() => Tweet, (tweet) => tweet.author, { lazy: true })
   tweets: Promise<Tweet[]>;
 
   @OneToMany(() => UserFollowing, (userFollowing) => userFollowing.following)
@@ -43,4 +44,16 @@ export class User {
 
   @OneToMany(() => UserFollowing, (userFollowing) => userFollowing.follower)
   following: UserFollowing[];
+
+  set password(pass: string) {
+    this._password = bcrypt.hashSync(pass, 8);
+  }
+
+  get password() {
+    return this._password;
+  }
+
+  public async validatePassword(pass: string) {
+    return bcrypt.compare(pass, this.password);
+  }
 }

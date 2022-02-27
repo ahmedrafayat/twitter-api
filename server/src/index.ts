@@ -9,11 +9,12 @@ import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 
+import passport from 'config/passport';
+import { errorHandler } from 'middlewares/errorHandler';
+import routes from 'routes';
 import { dbCreateConnection } from 'typeorm/connect';
 
-import { ErrorHandler } from './middlewares/ErrorHandler';
-import routes from './routes';
-
+const PORT = process.env.PORT || 5000;
 export const app = express();
 app.use(cors());
 app.use(helmet());
@@ -30,13 +31,14 @@ try {
 }
 app.use(morgan('combined'));
 
+app.use(passport.initialize());
+
 app.use('/', routes);
 
-app.use(ErrorHandler);
+app.use(errorHandler);
 
-const port = process.env.PORT || 5000;
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
 
 (async () => {
