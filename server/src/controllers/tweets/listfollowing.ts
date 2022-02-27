@@ -1,13 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
 import { getManager } from 'typeorm';
 
+import { CustomError } from 'response/CustomError';
 import { UserFollowing } from 'typeorm/entities/Follower';
 import { Tweet } from 'typeorm/entities/Tweet';
 import { User } from 'typeorm/entities/User';
 
 export const listFollowing = async (req: Request, res: Response, next: NextFunction) => {
-  // TODO: ownerId will be removed once authentication is set up
-  const { ownerId } = req.body;
+  const ownerId = req.user.id;
 
   try {
     const tweets = await getManager()
@@ -18,5 +18,8 @@ export const listFollowing = async (req: Request, res: Response, next: NextFunct
       .getMany();
 
     res.send(tweets);
-  } catch (err) {}
+  } catch (err) {
+    const customError = new CustomError(400, 'Raw', 'Error', null, err);
+    next(customError);
+  }
 };

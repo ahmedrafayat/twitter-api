@@ -36,7 +36,7 @@ export class User {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @OneToMany(() => Tweet, (tweet) => tweet.author)
+  @OneToMany(() => Tweet, (tweet) => tweet.author, { lazy: true })
   tweets: Promise<Tweet[]>;
 
   @OneToMany(() => UserFollowing, (userFollowing) => userFollowing.following)

@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 
+import { CustomError } from 'response/CustomError';
 import { User } from 'typeorm/entities/User';
 
 export const listown = async (req: Request, res: Response, next: NextFunction) => {
-  // TODO: ownerId will be removed once authentication is set up
-  const { ownerId } = req.body;
+  const ownerId = req.user.id;
 
   try {
     const userRepository = getRepository(User);
@@ -14,5 +14,8 @@ export const listown = async (req: Request, res: Response, next: NextFunction) =
     const tweets = await user.tweets;
 
     res.send(tweets);
-  } catch (err) {}
+  } catch (err) {
+    const customError = new CustomError(400, 'Raw', 'Error', null, err);
+    next(customError);
+  }
 };

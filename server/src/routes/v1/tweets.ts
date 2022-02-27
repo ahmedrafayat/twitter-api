@@ -6,7 +6,7 @@ import { validateJwt } from 'middlewares/ValidateJwt';
 const router = Router();
 
 router.post('/create', [validateJwt], create);
-router.post('/listown', listown);
-router.post('/listfollowers', listFollowing);
+router.post('/listown', [validateJwt], listown);
+router.post('/listfollowers', [validateJwt], listFollowing);
 
 export default router;

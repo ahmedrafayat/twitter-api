@@ -38,6 +38,6 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
     }
   } catch (err) {
     const customError = new CustomError(400, 'Raw', 'Error', null, err);
-    return next(customError);
+    next(customError);
   }
 };
