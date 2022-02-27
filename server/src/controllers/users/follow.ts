@@ -10,7 +10,7 @@ export const follow = async (req: Request, res: Response, next: NextFunction) =>
 
   const followingRepository = getRepository(UserFollowing);
   try {
-    const isFollowing = followingRepository.findOne({ where: { followerId: ownerId, followingId: id } });
+    const isFollowing = await followingRepository.findOne({ where: { followerId: ownerId, followingId: id } });
     if (isFollowing) {
       const customError = new CustomError(400, 'General', 'Already following this user', [
         `Already following user with id ${id}`,

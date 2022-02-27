@@ -1,11 +1,12 @@
 import { Router } from 'express';
 
-import { follow, listFollowers } from 'controllers/users';
+import { follow, followers } from 'controllers/users';
+import { validateFollowUser } from 'middlewares/request-validation/users';
 import { validateJwt } from 'middlewares/ValidateJwt';
 
 const router = Router();
 
-router.post('/follow/:id', [validateJwt], follow);
-router.get('/followers/:id', [validateJwt], listFollowers);
+router.post('/follow/:id', [validateJwt, validateFollowUser], follow);
+router.get('/followers', [validateJwt], followers);
 
 export default router;

@@ -1,2 +1,2 @@
 export * from './follow';
-export * from './list-followers';
+export * from './followers';
