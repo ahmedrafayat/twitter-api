@@ -4,6 +4,7 @@ import { ConnectionOptions } from 'typeorm-seeding';
 
 const config: ConnectionOptions = {
   type: 'mysql',
+  charset: 'utf8mb4',
   host: 'localhost',
   port: 3306,
   username: process.env.MYSQL_USER,

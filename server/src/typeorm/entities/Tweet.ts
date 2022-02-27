@@ -19,7 +19,7 @@ export class Tweet {
   @JoinColumn()
   author: User;
 
-  @Column()
+  @Column({ type: 'text', charset: 'utf8mb4' })
   content: string;
 
   @Column()
