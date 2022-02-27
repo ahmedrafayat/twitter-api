@@ -1,9 +1,8 @@
 import bcrypt from 'bcrypt';
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
-import { UserFollowing } from 'typeorm/entities/Follower';
 import { Tweet } from 'typeorm/entities/Tweet';
-
+import { UserFollowing } from 'typeorm/entities/UserFollowing';
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn()

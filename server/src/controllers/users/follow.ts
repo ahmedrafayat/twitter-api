@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 
 import { CustomError } from 'response/CustomError';
-import { UserFollowing } from 'typeorm/entities/Follower';
+import { UserFollowing } from 'typeorm/entities/UserFollowing';
 
 export const follow = async (req: Request, res: Response, next: NextFunction) => {
   const ownerId = req.user.id;
@@ -23,7 +23,7 @@ export const follow = async (req: Request, res: Response, next: NextFunction) =>
     newUserFollowing.followingId = Number(id);
 
     await followingRepository.save(newUserFollowing);
-    res.sendStatus(200).send('success');
+    res.status(200).send('success');
   } catch (err) {
     const customError = new CustomError(400, 'Raw', 'Error', null, err);
     return next(customError);
