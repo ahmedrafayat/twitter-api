@@ -20,7 +20,7 @@ export const create = async (req: Request, res: Response, next: NextFunction) =>
       return next(customError);
     }
 
-    const tweetRepository = await getRepository(Tweet);
+    const tweetRepository = getRepository(Tweet);
     const tweet = new Tweet();
     tweet.author = user;
     tweet.content = content;
