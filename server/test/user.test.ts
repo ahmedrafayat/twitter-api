@@ -66,5 +66,27 @@ describe('Users api', () => {
       expect(following.followerId).to.equal(followerId);
       expect(following.followingId).to.equal(followingId);
     });
+
+    it('should not be able follow themselves', async () => {
+      const followerId = savedUser1.id;
+      const followingId = savedUser1.id;
+      const res = await agent(app).post(`/v1/users/follow/${followingId}`).set('Authorization', `Bearer ${user1Token}`);
+      const following = await userFollowingRepository.findOne({
+        where: { followerId: followerId, followingId: followingId },
+      });
+      expect(res.status).to.equal(400);
+      expect(following).to.not.be.an('object');
+    });
+
+    it('should not be able follow invalid user id', async () => {
+      const followerId = savedUser1.id;
+      const followingId = -1;
+      const res = await agent(app).post(`/v1/users/follow/${followingId}`).set('Authorization', `Bearer ${user1Token}`);
+      const following = await userFollowingRepository.findOne({
+        where: { followerId: followerId, followingId: followingId },
+      });
+      expect(res.status).to.equal(400);
+      expect(following).to.not.be.an('object');
+    });
   });
 });
