@@ -1,1 +1,1 @@
-docker-compose --file ../../docker-compose.yaml --file ../../docker-compose.stage.yaml down
+docker-compose -f ../../docker-compose.yaml -f ../../docker-compose.stage.yaml down

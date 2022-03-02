@@ -1,1 +1,1 @@
-docker-compose --file ../../docker-compose.yaml --file ../../docker-compose.dev.yaml up -d
+docker-compose -f ../../docker-compose.yaml -f ../../docker-compose.dev.yaml up -d
