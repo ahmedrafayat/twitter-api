@@ -11,12 +11,13 @@ export const listFollowing = async (req: Request, res: Response, next: NextFunct
 
   try {
     const tweets = await getManager()
-      .createQueryBuilder(Tweet, 't')
-      .innerJoin(UserFollowing, 'uf', 'uf.follower_id = t.author_id')
-      .innerJoin(User, 'u', 't.author_id = u.id')
+      .createQueryBuilder(User, 'u')
+      .select(['t.id id', 't.content content', 't.author_id authorId'])
+      .innerJoin(UserFollowing, 'uf', 'uf.follower_id = u.id')
+      .innerJoin(Tweet, 't', 't.author_id = uf.following_id')
       .where('u.id = :ownerId', { ownerId })
       .orderBy('t.created_at', 'DESC')
-      .getMany();
+      .getRawMany();
 
     res.send(tweets);
   } catch (err) {
