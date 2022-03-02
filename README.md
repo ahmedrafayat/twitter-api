@@ -31,7 +31,7 @@ For development build
    ./scripts/dev/stop.dev.sh
    ```
 
-For staging build
+For running tests
 
 1. To start up mysql
    ```
