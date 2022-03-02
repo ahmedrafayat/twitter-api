@@ -1,0 +1,1 @@
+docker-compose --file ../../docker-compose.yaml --file ../../docker-compose.stage.yaml down
