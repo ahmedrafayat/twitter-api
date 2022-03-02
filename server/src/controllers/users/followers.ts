@@ -10,7 +10,7 @@ export const followers = async (req: Request, res: Response, next: NextFunction)
   try {
     const followers = await getRepository(UserFollowing).find({
       where: { followingId: actorId },
-      select: ['follower', 'createdAt'],
+      select: ['follower'],
     });
 
     res.send(followers);

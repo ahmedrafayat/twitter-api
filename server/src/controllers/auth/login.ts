@@ -10,7 +10,11 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
 
   const userRepository = getRepository(User);
   try {
-    const user = await userRepository.findOne({ where: { email: ILike(email) } });
+    const user = await userRepository
+      .createQueryBuilder('users')
+      .addSelect('users._password')
+      .where({ email: ILike(email) })
+      .getOne();
 
     if (!user || !(await user.validatePassword(password))) {
       const customError = new CustomError(400, 'General', 'Login failed', [`Invalid email address or password`]);

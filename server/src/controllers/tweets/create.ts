@@ -23,7 +23,10 @@ export const create = async (req: Request, res: Response, next: NextFunction) =>
     const tweetRepository = getRepository(Tweet);
     const tweet = Tweet.createTweet(content, user.id);
     const savedTweet = await tweetRepository.save(tweet);
-    res.status(200).send(savedTweet);
+    res.status(200).send({
+      id: tweet.id,
+      content: tweet.content,
+    });
   } catch (err) {
     const customError = new CustomError(400, 'Raw', 'Error', null, err);
     next(customError);

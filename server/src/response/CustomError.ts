@@ -37,7 +37,6 @@ export class CustomError extends Error {
       errorType: this.errorType,
       errorMessage: this.message,
       errors: this.errors,
-      errorRaw: this.errorRaw,
       errorsValidation: this.errorsValidation,
     };
   }
