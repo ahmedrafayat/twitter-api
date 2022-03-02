@@ -18,7 +18,8 @@ For development build
 
 1. To start up mysql
    ```
-   ./scripts/dev/start.dev.sh
+   cd scripts/dev
+   ./start.dev.sh
    ```
 1. Install dependencies
    ```
@@ -39,14 +40,16 @@ For development build
    ```
 1. To stop mysql
    ```
-   ./scripts/dev/stop.dev.sh
+   cd scripts/dev
+   ./stop.dev.sh
    ```
 
 For running tests
 
 1. To start up mysql
    ```
-   ./scripts/test/start.test.sh
+   cd scripts/stage
+   ./start.test.sh
    ```
 1. Install dependencies
    ```
@@ -60,5 +63,6 @@ For running tests
    ```
 1. To stop mysql
    ```
-   ./scripts/test/stop.test.sh
+   cd scripts/stage
+   ./stop.test.sh
    ```
