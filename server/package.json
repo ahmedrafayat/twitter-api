@@ -6,10 +6,10 @@
   "scripts": {
     "dev": "cross-env debug=* NODE_ENV=development NODE_PATH=./src ts-node-dev --respawn --inspect=4321 ./src/index.ts",
     "test": "cross-env NODE_ENV=staging NODE_PATH=./src mocha --require ts-node/register 'test/**/*.test.ts' --timeout 20000 --exit",
-    "seed:config": "ts-node ./node_modules/typeorm-seeding/dist/cli.js --root ./src/typeorm/config --configName ormConfig.ts config",
-    "seed:run": "NODE_ENV=development NODE_PATH=./src ts-node ./node_modules/typeorm-seeding/dist/cli.js --root ./src/typeorm/config --configName ormconfig.dev.ts seed",
-    "schema:drop": "ts-node ./node_modules/typeorm/cli.js schema:drop --config ./src/typeorm/config/ormConfig.ts",
-    "schema:sync": "ts-node ./node_modules/typeorm/cli.js schema:sync"
+    "seed:config": "ts-node ./node_modules/typeorm-seeding/dist/cli.js --root ./src/typeorm/config --configName ormconfig.dev.ts config",
+    "seed:run": "cross-env NODE_ENV=development NODE_PATH=./src ts-node ./node_modules/typeorm-seeding/dist/cli.js --root ./src/typeorm/config --configName ormconfig.dev.ts seed",
+    "schema:drop": "ts-node ./node_modules/typeorm/cli.js schema:drop --config ./src/typeorm/config/ormconfig.dev.ts",
+    "schema:sync": "ts-node ./node_modules/typeorm/cli.js schema:sync --config ./src/typeorm/config/ormconfig.dev.ts"
   },
   "author": "",
   "license": "ISC",

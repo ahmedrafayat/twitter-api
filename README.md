@@ -20,13 +20,24 @@ For development build
    ```
    ./scripts/dev/start.dev.sh
    ```
-2. To start up server on port 5000
+1. Install dependencies
    ```
    cd server
    npm i
+   ```
+1. To seed database with users (Optional)
+
+   ```
+   cd server
+   npm run seed:run
+   ```
+
+1. To start up server on port 5000
+   ```
+   cd server
    npm run dev
    ```
-3. To stop mysql
+1. To stop mysql
    ```
    ./scripts/dev/stop.dev.sh
    ```
@@ -37,13 +48,17 @@ For running tests
    ```
    ./scripts/test/start.test.sh
    ```
-2. To start up server on port 5000
+1. Install dependencies
    ```
    cd server
    npm i
+   ```
+1. To start up server on port 5000
+   ```
+   cd server
    npm run test
    ```
-3. To stop mysql
+1. To stop mysql
    ```
    ./scripts/test/stop.test.sh
    ```
