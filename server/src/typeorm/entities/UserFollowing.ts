@@ -21,4 +21,11 @@ export class UserFollowing {
 
   @ManyToOne(() => User, (user) => user.following, { eager: true, onDelete: 'CASCADE' })
   following: User;
+
+  static createFollowing(follower: number, following: number) {
+    const userFollowing = new UserFollowing();
+    userFollowing.followerId = follower;
+    userFollowing.followingId = following;
+    return userFollowing;
+  }
 }

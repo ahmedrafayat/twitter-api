@@ -15,9 +15,12 @@ export class Tweet {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => User, (user) => user.id, { onDelete: 'CASCADE' })
-  @JoinColumn()
-  author: User;
+  @Column()
+  @JoinColumn({ referencedColumnName: 'id' })
+  authorId: number;
+
+  @ManyToOne(() => User, (user) => user.id, { onDelete: 'CASCADE', lazy: true })
+  author: Promise<User>;
 
   @Column({ type: 'text', charset: 'utf8mb4' })
   content: string;
@@ -29,4 +32,11 @@ export class Tweet {
   @Column()
   @UpdateDateColumn()
   updated_at: Date;
+
+  static createTweet(content: string, authorId: number) {
+    const tweet = new Tweet();
+    tweet.content = content;
+    tweet.authorId = authorId;
+    return tweet;
+  }
 }

@@ -55,4 +55,12 @@ export class User {
   public async validatePassword(pass: string) {
     return bcrypt.compare(pass, this.password);
   }
+
+  static createUser(name: string, email: string, password: string) {
+    const user = new User();
+    user.name = name;
+    user.email = email;
+    user.password = password;
+    return user;
+  }
 }
