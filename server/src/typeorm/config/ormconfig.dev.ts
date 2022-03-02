@@ -2,7 +2,7 @@ import 'dotenv/config';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { ConnectionOptions } from 'typeorm-seeding';
 
-const config: ConnectionOptions = {
+const devConfig: ConnectionOptions = {
   type: 'mysql',
   charset: 'utf8mb4',
   host: 'localhost',
@@ -21,4 +21,4 @@ const config: ConnectionOptions = {
   factories: ['src/typeorm/factories/**/*{.ts,.js}'],
 };
 
-export = config;
+export = devConfig;
