@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import { create, listFollowing, listown } from 'controllers/tweets';
 import { validateCreateTweet } from 'middlewares/request-validation/tweets';
-import { validateJwt } from 'middlewares/ValidateJwt';
+import { validateJwt } from 'middlewares/validateJwt';
 
 const router = Router();
 
