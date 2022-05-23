@@ -1,7 +1,7 @@
 name: pull-request-comment
 on: [push, pull_request, issue_comment]
 jobs:
-  pr-comment-job:
+  pr-comment-job: 
     runs-on: ubuntu-latest
     steps:
       - name: Is this a pull request
@@ -18,5 +18,9 @@ jobs:
         shell: bash
         run: echo "BRANCH_NAME=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
 
-      - name: Debug
+      - name: Debug env
+        run: env
+      - name: Debug 1
         run: echo ${{ env.BRANCH_NAME }}
+      - name: Debug 2
+        run: echo $BRANCH_NAME
