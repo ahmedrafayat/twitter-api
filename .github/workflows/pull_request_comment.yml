@@ -1,5 +1,5 @@
 name: pull-request-comment
-on: [pull_request_comment]
+on: issue_comment
 jobs:
   pr-comment-job:
     if: ${{ github.event.issue.pull_request }}
