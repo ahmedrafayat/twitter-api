@@ -1,11 +1,13 @@
 name: pull-request-comment
-on: issue_comment
+on: [push, pull_request, issue_comment]
 jobs:
   pr-comment-job:
-    if: ${{ github.event.issue.pull_request }}
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{GITHUB_HEAD_REF}}
+      - name: Is this a pull request
+        if: ${{ github.event.issue.pull_request }}
+        run: echo "This is a PR"
+      - run: echo $GITHUB_HEAD_REF $GITHUB_REF
       - name: Get branch name (merge)
         if: github.event_name != 'pull_request'
         shell: bash
